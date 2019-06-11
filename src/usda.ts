@@ -34,11 +34,16 @@ export default class USDA {
       /* 
          We divide by 100 because of how we store the nutrients - we can easly multiply them by 100 grams (serving size). We store them as nutrient per 1 g.
       */
-      if (nutrient.unit === 'µg') return nutrient.value / 100
-      if (nutrient.unit === 'mg') return (nutrient.value * 1000) / 100
-      if (nutrient.unit === 'g') return (nutrient.value * 1000 * 1000) / 100
-      if (nutrient.unit === 'kcal') return nutrient.value / 100
+      const allowedUnits = ['µg', 'mg', 'g', 'kcal']
 
+      if (nutrient.unit === 'µg') nutrient.value = nutrient.value / 100
+      if (nutrient.unit === 'mg') nutrient.value = (nutrient.value * 1000) / 100
+      if (nutrient.unit === 'g') nutrient.value = (nutrient.value * 1000 * 1000) / 100
+      if (nutrient.unit === 'kcal') nutrient.value = nutrient.value / 100
+
+      if (allowedUnits.includes(nutrient.unit)) {
+        return nutrient.value
+      }
       throw Error(`Unrecognized unit ${nutrient.unit}`)
     }
     return {
