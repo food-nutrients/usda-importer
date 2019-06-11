@@ -84,18 +84,20 @@ class USDA {
     }
 }
 
-(async function () {
-    if (process.argv.length !== 3) {
-        console.log('USDA Food Data Extractor');
-        console.log('=======================');
-        console.log('Usage: node dist/usda.js [usda_id]');
-        console.log('You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list')
-        console.log('Example Usage: node dist/usda.js 11564');
-        process.exit()
-    }
-    const usda = new USDA();
-    const access_token = 'NVedpClwdoyIIuXpeWNlkMnBeABnK922mcZwhqPv';
-    const food = await usda.cachedGetFoodById(process.argv[2], access_token);
-    const formattedFood = usda.formatFood(food);
-    console.log(JSON.stringify(formattedFood, null, 4));
-})()
+if (require.main === module) {
+    (async function () {
+        if (process.argv.length !== 3) {
+            console.log('USDA Food Data Extractor');
+            console.log('=======================');
+            console.log('Usage: node dist/usda.js [usda_id]');
+            console.log('You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list')
+            console.log('Example Usage: node dist/usda.js 11564');
+            process.exit()
+        }
+        const usda = new USDA();
+        const access_token = 'NVedpClwdoyIIuXpeWNlkMnBeABnK922mcZwhqPv';
+        const food = await usda.cachedGetFoodById(process.argv[2], access_token);
+        const formattedFood = usda.formatFood(food);
+        console.log(JSON.stringify(formattedFood, null, 4));
+    })()
+}
