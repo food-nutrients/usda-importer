@@ -9,7 +9,9 @@
 > Live website: <http://usda-importer.github.io>
 
 
-![Release](https://img.shields.io/github/release/usda-importer/usda-importer.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/usda-importer/usda-importer.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f37798aff8949f0a3895127a5f82c17)](https://app.codacy.com/app/kolarski/usda-importer?utm_source=github.com&utm_medium=referral&utm_content=usda-importer/usda-importer&utm_campaign=Badge_Grade_Dashboard) <a href="https://codeclimate.com/github/usda-importer/usda-importer/maintainability"><img src="https://api.codeclimate.com/v1/badges/cf96fe18b9779907d50a/maintainability" /></a> <a href="https://codeclimate.com/github/usda-importer/usda-importer/test_coverage"><img src="https://api.codeclimate.com/v1/badges/cf96fe18b9779907d50a/test_coverage" /></a> ![Dependencies](https://img.shields.io/david/usda-importer/usda-importer.svg) [![Build Status](https://travis-ci.org/usda-importer/usda-importer.svg?branch=master)](https://travis-ci.org/usda-importer/usda-importer)
+![Release](https://img.shields.io/github/release/usda-importer/usda-importer.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/usda-importer/usda-importer.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/7f37798aff8949f0a3895127a5f82c17)](https://app.codacy.com/app/kolarski/usda-importer?utm_source=github.com&utm_medium=referral&utm_content=usda-importer/usda-importer&utm_campaign=Badge_Grade_Dashboard)
+<a href="https://codeclimate.com/github/food-nutrients/usda-importer/maintainability"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/maintainability" /></a>
+<a href="https://codeclimate.com/github/food-nutrients/usda-importer/test_coverage"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/test_coverage" /></a> ![Dependencies](https://img.shields.io/david/usda-importer/usda-importer.svg) [![Build Status](https://travis-ci.org/usda-importer/usda-importer.svg?branch=master)](https://travis-ci.org/usda-importer/usda-importer)
 
 [![Food Nutrients website](https://raw.githubusercontent.com/usda-importer/usda-importer/master/public/screenshots/screen1.png?raw=true)](http://usda-importer.github.io "Food Nutrients website")
 
@@ -17,22 +19,21 @@
 
 ```
 npm install
+tsc
 ```
 
 # Usage
+You can find the usda_id from: https://ndb.nal.usda.gov/ndb/search/list
+
 
 ```
 node dist/usda.js [usda_id]
 ```
 
-You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list
-
-
-### Example Usage: 
+### Example Usage for (Turnips, raw): 
 ```
 node dist/usda.js 11564
 ```
-
 
 ## Contribution
 
