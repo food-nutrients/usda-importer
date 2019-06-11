@@ -24,13 +24,13 @@ tsc
 You can find the usda_id from: https://ndb.nal.usda.gov/ndb/search/list
 
 ```
-node dist/usda.js [usda_id]
+node dist/app.js [usda_id]
 ```
 
 ### Example Usage for (Turnips, raw):
 
 ```
-node dist/usda.js 11564
+node dist/app.js 11564
 ```
 
 ## Contribution
