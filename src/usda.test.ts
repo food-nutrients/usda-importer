@@ -128,8 +128,8 @@ test('Usage', async () => {
   expect(result).toStrictEqual([
     'USDA Food Data Extractor',
     '=======================',
-    'Usage: node dist/usda.js [usda_id]',
+    'Usage: node dist/app.js [usda_id]',
     'You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list',
-    'Example Usage: node dist/usda.js 11564',
+    'Example Usage: node dist/app.js 11564',
   ])
 })
