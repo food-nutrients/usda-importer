@@ -6,7 +6,7 @@
 
 ![Release](https://img.shields.io/github/release/food-nutrients/usda-importer.svg) ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/food-nutrients/usda-importer.svg) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5577ca26a54746038b56c9bddbaa335c)](https://www.codacy.com/app/kolarski/usda-importer?utm_source=github.com&utm_medium=referral&utm_content=food-nutrients/usda-importer&utm_campaign=Badge_Grade)
 <a href="https://codeclimate.com/github/food-nutrients/usda-importer/maintainability"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/maintainability" /></a>
-<a href="https://codeclimate.com/github/food-nutrients/usda-importer/test_coverage"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/test_coverage" /></a> ![Dependencies](https://img.shields.io/david/food-nutrients/usda-importer.svg) [![Build Status](https://travis-ci.org/food-nutrients/usda-importer.svg?branch=master)](https://travis-ci.org/food-nutrients/usda-importer)
+<a href="https://codeclimate.com/github/food-nutrients/usda-importer/test_coverage"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/test_coverage" /></a> [![Build Status](https://travis-ci.org/food-nutrients/usda-importer.svg?branch=master)](https://travis-ci.org/food-nutrients/usda-importer)
 
 [![Food Nutrients website](https://raw.githubusercontent.com/food-nutrients/food-nutrients/master/public/screenshots/screen1.png?raw=true)](http://food-nutrients.github.io 'Food Nutrients website')
 
