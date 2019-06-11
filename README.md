@@ -15,7 +15,7 @@ Live website: <http://food-nutrients.github.io>
 # Setup
 
 ```
-npm install
+yarn install
 tsc
 ```
 
