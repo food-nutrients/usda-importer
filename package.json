@@ -4,19 +4,24 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest  --coverage -u"
+    "test": "jest  --coverage"
+  },
+  "jest": {
+    "roots": [
+      "dist/"
+    ]
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.1",
-    "fs-extra": "^8.0.1",
-    "typescript": "^3.4.5"
+    "fs-extra": "^8.0.1"
   },
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/jest": "^24.0.13",
-    "jest": "^24.8.0"
+    "jest": "^24.8.0",
+    "typescript": "^3.5.1"
   }
 }
