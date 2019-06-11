@@ -1,5 +1,6 @@
 import axios from 'axios'
 import fs from 'fs-extra'
+import path from 'path'
 
 export default class USDA {
   async getFoodByID(foodId: string, access_token: string): Promise<any> {
@@ -9,12 +10,19 @@ export default class USDA {
 
   async cachedGetFoodById(foodId: string, access_token: string): Promise<any> {
     try {
-      const food = JSON.parse(await fs.readFile(`foods/${foodId}.json`, 'utf-8'))
+      const food = JSON.parse(
+        await fs.readFile(path.resolve(__dirname, `../foods/${foodId}.json`), 'utf-8'),
+      )
       return food
     } catch (e) {
       const food = await this.getFoodByID(foodId, access_token)
-      await fs.writeFile(`foods/${foodId}.json`, JSON.stringify(food, null, 4))
-      return JSON.parse(await fs.readFile(`foods/${foodId}.json`, 'utf-8'))
+      await fs.writeFile(
+        path.resolve(__dirname, `../foods/${foodId}.json`),
+        JSON.stringify(food, null, 4),
+      )
+      return JSON.parse(
+        await fs.readFile(path.resolve(__dirname, `../foods/${foodId}.json`), 'utf-8'),
+      )
     }
   }
 
@@ -84,16 +92,19 @@ export default class USDA {
       },
     }
   }
+  static usage() {
+    console.log('USDA Food Data Extractor')
+    console.log('=======================')
+    console.log('Usage: node dist/usda.js [usda_id]')
+    console.log('You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list')
+    console.log('Example Usage: node dist/usda.js 11564')
+  }
 }
 
 if (require.main === module) {
   ;(async function() {
     if (process.argv.length !== 3) {
-      console.log('USDA Food Data Extractor')
-      console.log('=======================')
-      console.log('Usage: node dist/usda.js [usda_id]')
-      console.log('You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list')
-      console.log('Example Usage: node dist/usda.js 11564')
+      USDA.usage()
       process.exit()
     }
     const usda = new USDA()
