@@ -31,37 +31,6 @@ export class USDA {
     return food
   }
 
-  /* 
-      We divide by 100 because of how we store the nutrients - 
-      we can easly multiply them by 100 grams (serving size). 
-      We store them as nutrient per 1 g.
-    */
-  private convertNutrientUnits(nutrient: UsdaFoodNutrient): number {
-
-    const unitMap = {
-      'µg': (1 / 100),
-      'mg': 1000 * (1 / 100),
-      'g': 1000 * 1000 * (1 / 100),
-      'kcal': (1 / 100),
-    }
-
-    if (Object.keys(unitMap).includes(nutrient.unit)) {
-      return +(unitMap[nutrient.unit] * nutrient.value).toFixed(2);
-    }
-    throw Error(`Unrecognized unit ${nutrient.unit}`)
-  }
-
-  private findNutrient(nutrients: Array<UsdaFoodNutrient>, nutrient_id: number): UsdaFoodNutrient {
-    return nutrients.find((nutrient: UsdaFoodNutrient) => nutrient.nutrient_id === nutrient_id)
-  }
-
-  private extractNutrient(nutrients: Array<UsdaFoodNutrient>): (nutrient_id: number) => number {
-    return (nutrient_id: number) => {
-      const nutrient = this.findNutrient(nutrients, nutrient_id);
-      return (nutrient) ? this.convertNutrientUnits(nutrient) : null
-    }
-  }
-
   /* tslint:disable:object-literal-sort-keys no-magic-numbers*/
   public formatFood(food: UsdaFood): FoodNutritionFood {
     const get = this.extractNutrient(food.nutrients)
@@ -117,4 +86,37 @@ export class USDA {
     }
   }
   /* tslint:enable:object-literal-sort-keys no-magic-numbers*/
+
+  /* 
+      We divide by 100 because of how we store the nutrients - 
+      so we can easly multiply them by 100 grams (serving size). 
+      We store them as nutrient per 1 g.
+    */
+  private convertNutrientUnits(nutrient: UsdaFoodNutrient): number {
+
+    /* tslint:enable:object-literal-sort-keys no-magic-numbers*/
+    const unitMap = {
+      'µg': (1 / 100),
+      'mg': 1000 * (1 / 100),
+      'g': 1000 * 1000 * (1 / 100),
+      'kcal': (1 / 100),
+    }
+    /* tslint:enable:object-literal-sort-keys no-magic-numbers*/
+
+    if (Object.keys(unitMap).includes(nutrient.unit)) {
+      return +(unitMap[nutrient.unit] * nutrient.value).toFixed(2);
+    }
+    throw Error(`Unrecognized unit ${nutrient.unit}`)
+  }
+
+  private findNutrient(nutrients: Array<UsdaFoodNutrient>, nutrient_id: number): UsdaFoodNutrient {
+    return nutrients.find((nutrient: UsdaFoodNutrient) => nutrient.nutrient_id === nutrient_id)
+  }
+
+  private extractNutrient(nutrients: Array<UsdaFoodNutrient>): (nutrient_id: number) => number {
+    return (nutrient_id: number) => {
+      const nutrient = this.findNutrient(nutrients, nutrient_id);
+      return (nutrient) ? this.convertNutrientUnits(nutrient) : null
+    }
+  }
 }

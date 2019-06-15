@@ -1,7 +1,7 @@
 import { USDA } from './usda'
 
 if (require.main === module) {
-  ; (async function () {
+  (async () => {
     if (process.argv.length !== 3) {
       USDA.usage()
       process.exit()
