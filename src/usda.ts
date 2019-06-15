@@ -2,50 +2,60 @@ import axios from 'axios'
 import fs from 'fs-extra'
 import path from 'path'
 
+import UsdaFood from './USDAFoodInterface';
+import UsdaFoodNutrient from './USDAFoodNutrientInterface';
+
 export default class USDA {
-  async getFoodByID(foodId: string, access_token: string): Promise<any> {
+  async getFoodByID(foodId: string, access_token: string): Promise<UsdaFood> {
     const url = `https://api.nal.usda.gov/ndb/V2/reports?ndbno=${foodId}&type=f&format=json&api_key=${access_token}`
     return (await axios.get(url)).data.foods[0].food
   }
 
-  async cachedGetFoodById(foodId: string, access_token: string): Promise<any> {
+  async cachedGetFoodById(foodId: string, access_token: string): Promise<UsdaFood> {
+    const foodCachePath = path.resolve(__dirname, `../foods/${foodId}.json`);
+    let food = null;
     try {
-      const food = JSON.parse(
-        await fs.readFile(path.resolve(__dirname, `../foods/${foodId}.json`), 'utf-8'),
-      )
-      return food
+      food = JSON.parse(await fs.readFile(foodCachePath, 'utf-8'))
     } catch (e) {
-      const food = await this.getFoodByID(foodId, access_token)
-      await fs.writeFile(
-        path.resolve(__dirname, `../foods/${foodId}.json`),
-        JSON.stringify(food, null, 4),
-      )
-      return JSON.parse(
-        await fs.readFile(path.resolve(__dirname, `../foods/${foodId}.json`), 'utf-8'),
-      )
+      food = await this.getFoodByID(foodId, access_token)
+      await fs.writeFile(foodCachePath, JSON.stringify(food, null, 4))
+    }
+    return food
+  }
+
+  /* 
+      We divide by 100 because of how we store the nutrients - 
+      we can easly multiply them by 100 grams (serving size). 
+      We store them as nutrient per 1 g.
+    */
+  convertNutrientUnits(nutrient: UsdaFoodNutrient) {
+
+    const unitMap = {
+      'µg': (1 / 100),
+      'mg': 1000 * (1 / 100),
+      'g': 1000 * 1000 * (1 / 100),
+      'kcal': (1 / 100)
+    }
+
+    if (Object.keys(unitMap).includes(nutrient.unit)) {
+      return +(unitMap[nutrient.unit] * nutrient.value).toFixed(2);
+    }
+    throw Error(`Unrecognized unit ${nutrient.unit}`)
+  }
+
+  findNutrient(nutrients: Array<UsdaFoodNutrient>, nutrient_id: number) {
+    return nutrients.find((nutrient: UsdaFoodNutrient) => nutrient.nutrient_id === nutrient_id)
+  }
+
+  extractNutrient(nutrients: Array<UsdaFoodNutrient>) {
+    return (nutrient_id: number) => {
+      const nutrient = this.findNutrient(nutrients, nutrient_id);
+      return (nutrient) ? this.convertNutrientUnits(nutrient) : null
     }
   }
 
-  formatFood(food: any) {
-    const get = (id: number): number => {
-      if (id === null) return null
-      const nutrient = food.nutrients.find((nutrient: any) => nutrient.nutrient_id === id)
-      if (!nutrient) return null
-      /* 
-         We divide by 100 because of how we store the nutrients - we can easly multiply them by 100 grams (serving size). We store them as nutrient per 1 g.
-      */
-      const allowedUnits = ['µg', 'mg', 'g', 'kcal']
-
-      if (nutrient.unit === 'µg') nutrient.value = nutrient.value / 100
-      if (nutrient.unit === 'mg') nutrient.value = (nutrient.value * 1000) / 100
-      if (nutrient.unit === 'g') nutrient.value = (nutrient.value * 1000 * 1000) / 100
-      if (nutrient.unit === 'kcal') nutrient.value = nutrient.value / 100
-
-      if (allowedUnits.includes(nutrient.unit)) {
-        return nutrient.value
-      }
-      throw Error(`Unrecognized unit ${nutrient.unit}`)
-    }
+  formatFood(food: UsdaFood) {
+    const get = this.extractNutrient(food.nutrients)
     return {
       name: food.desc.name,
       usda_id: food.desc.ndbno,

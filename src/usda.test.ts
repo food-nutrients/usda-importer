@@ -31,7 +31,7 @@ test('General fetching works', async () => {
       Copper: 0.85,
       Molybdenum: null,
       Manganese: 1.34,
-      Selenium: 0.006999999999999999,
+      Selenium: 0.01,
       'Vitamin C': 210,
       'Vitamin B12': 0,
       'Vitamin B1': 0.4,
@@ -44,7 +44,7 @@ test('General fetching works', async () => {
       Choline: 111,
       'Vitamin A': 0,
       'Vitamin E': 0.3,
-      'Vitamin K': 0.001,
+      'Vitamin K': 0,
       'Linoleic acid': null,
       'α-Linolenic acid': null,
       Tryptophan: 90,
@@ -89,7 +89,7 @@ test('General caching works', async () => {
       Copper: 0.85,
       Molybdenum: null,
       Manganese: 1.34,
-      Selenium: 0.006999999999999999,
+      Selenium: 0.01,
       'Vitamin C': 210,
       'Vitamin B12': 0,
       'Vitamin B1': 0.4,
@@ -102,7 +102,7 @@ test('General caching works', async () => {
       Choline: 111,
       'Vitamin A': 0,
       'Vitamin E': 0.3,
-      'Vitamin K': 0.001,
+      'Vitamin K': 0,
       'Linoleic acid': null,
       'α-Linolenic acid': null,
       Tryptophan: 90,
@@ -120,7 +120,7 @@ test('General caching works', async () => {
 test('Usage', async () => {
   const cl = console.log
   const result = []
-  console.log = function(d: string) {
+  console.log = function (d: string) {
     result.push(d)
   }
   USDA.usage()
