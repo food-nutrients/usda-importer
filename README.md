@@ -8,8 +8,6 @@
 <a href="https://codeclimate.com/github/food-nutrients/usda-importer/maintainability"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/maintainability" /></a>
 <a href="https://codeclimate.com/github/food-nutrients/usda-importer/test_coverage"><img src="https://api.codeclimate.com/v1/badges/18c12d31d2b2e97d41df/test_coverage" /></a> [![Build Status](https://travis-ci.org/food-nutrients/usda-importer.svg?branch=master)](https://travis-ci.org/food-nutrients/usda-importer)
 
-[![Food Nutrients website](https://raw.githubusercontent.com/food-nutrients/food-nutrients/master/public/screenshots/screen1.png?raw=true)](http://food-nutrients.github.io 'Food Nutrients website')
-
 Live website: <http://food-nutrients.github.io>
 
 ## Setup
