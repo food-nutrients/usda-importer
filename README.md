@@ -12,24 +12,24 @@
 
 Live website: <http://food-nutrients.github.io>
 
-# Setup
+## Setup
 
-```
+```bash
 yarn install
 tsc
 ```
 
-# Usage
+## Usage
 
-You can find the usda_id from: https://ndb.nal.usda.gov/ndb/search/list
+You can find the usda_id from: <https://ndb.nal.usda.gov/ndb/search/list>
 
-```
+```bash
 node dist/app.js [usda_id]
 ```
 
-### Example Usage for (Turnips, raw):
+### Example Usage for (Turnips, raw)
 
-```
+```bash
 node dist/app.js 11564
 ```
 

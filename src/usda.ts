@@ -5,8 +5,8 @@ import path from 'path'
 import { UsdaFood } from './USDAFoodInterface';
 import { UsdaFoodNutrient } from './USDAFoodNutrientInterface';
 
-export default class USDA {
-  async getFoodByID(foodId: string, access_token: string): Promise<UsdaFood> {
+export class USDA {
+  public async getFoodByID(foodId: string, access_token: string): Promise<UsdaFood> {
     const url = `https://api.nal.usda.gov/ndb/V2/reports?ndbno=${foodId}&type=f&format=json&api_key=${access_token}`
     return (await axios.get(url)).data.foods[0].food
   }
@@ -54,6 +54,7 @@ export default class USDA {
     }
   }
 
+  /* tslint:disable:object-literal-sort-keys no-magic-numbers*/
   formatFood(food: UsdaFood) {
     const get = this.extractNutrient(food.nutrients)
     return {
@@ -84,8 +85,8 @@ export default class USDA {
         'Vitamin B12': get(418),
         'Vitamin B1': get(404), // Thiamine or thiamin
         'Vitamin B2': get(405), // Riboflavin
-        'Vitamin B3': get(406), // 3 forms (nicotinamide (niacinamide), niacin (nicotinic acid), and nicotinamide riboside)
-        'Vitamin B5': get(410), //Pantothenic acid
+        'Vitamin B3': get(406), // (nicotinamide (niacinamide), niacin (nicotinic acid), and nicotinamide riboside)
+        'Vitamin B5': get(410), // Pantothenic acid
         'Vitamin B6': get(415),
         'Vitamin B7': get(null), // Biotin, formerly known vit. H or coenzyme R
         'Vitamin B9': get(431), // Folic acid
@@ -107,6 +108,7 @@ export default class USDA {
       },
     }
   }
+  /* tslint:enable:object-literal-sort-keys no-magic-numbers*/
   static usage() {
     console.log('USDA Food Data Extractor')
     console.log('=======================')

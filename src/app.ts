@@ -1,4 +1,4 @@
-import USDA from './usda'
+import { USDA } from './usda'
 
 if (require.main === module) {
   ; (async function () {

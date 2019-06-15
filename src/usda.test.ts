@@ -1,4 +1,4 @@
-import USDA from './usda'
+import { USDA } from './usda'
 import fs from 'fs-extra'
 
 test('General fetching works', async () => {
