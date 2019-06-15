@@ -1,6 +1,6 @@
 import UsdaFoodNutrient from "./USDAFoodNutrientInterface";
 
-export default interface UsdaFood {
+export interface UsdaFood {
     desc: {
         name: string,
         ndbno: number

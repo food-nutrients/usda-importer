@@ -2,8 +2,8 @@ import axios from 'axios'
 import fs from 'fs-extra'
 import path from 'path'
 
-import UsdaFood from './USDAFoodInterface';
-import UsdaFoodNutrient from './USDAFoodNutrientInterface';
+import { UsdaFood } from './USDAFoodInterface';
+import { UsdaFoodNutrient } from './USDAFoodNutrientInterface';
 
 export default class USDA {
   async getFoodByID(foodId: string, access_token: string): Promise<UsdaFood> {

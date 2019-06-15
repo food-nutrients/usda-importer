@@ -117,6 +117,15 @@ test('General caching works', async () => {
     },
   })
 })
+test('Testing unrecognized unit', async () => {
+  const usda = new USDA()
+  const usda_id = '11564'
+  const access_token = 'NVedpClwdoyIIuXpeWNlkMnBeABnK922mcZwhqPv'
+  const food = await usda.cachedGetFoodById(usda_id, access_token)
+  const calciumId = food.nutrients.findIndex(n => n.nutrient_id === 301);
+  food.nutrients[calciumId].unit = 'randomUnit';
+  expect(usda.formatFood.bind(usda, food)).toThrowError('Unrecognized unit randomUnit');
+})
 test('Usage', async () => {
   const cl = console.log
   const result = []
