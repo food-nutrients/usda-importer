@@ -10,6 +10,6 @@ if (require.main === module) {
     const access_token = 'NVedpClwdoyIIuXpeWNlkMnBeABnK922mcZwhqPv'
     const food = await usda.cachedGetFoodById(process.argv[2], access_token)
     const formattedFood = usda.formatFood(food)
-    console.log(JSON.stringify(formattedFood, null, 4))
+    console.log(JSON.stringify(formattedFood, null, 4)) // tslint:disable-line:no-magic-numbers
   })()
 }

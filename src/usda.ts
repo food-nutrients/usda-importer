@@ -26,7 +26,7 @@ export class USDA {
       food = JSON.parse(await fs.readFile(foodCachePath, 'utf-8'))
     } catch (e) {
       food = await this.getFoodByID(foodId, access_token)
-      await fs.writeFile(foodCachePath, JSON.stringify(food, null, 4))
+      await fs.writeFile(foodCachePath, JSON.stringify(food, null, 4)) // tslint:disable-line:no-magic-numbers
     }
     return food
   }
@@ -94,7 +94,7 @@ export class USDA {
     */
   private convertNutrientUnits(nutrient: UsdaFoodNutrient): number {
 
-    /* tslint:enable:object-literal-sort-keys no-magic-numbers*/
+    /* tslint:disable:object-literal-sort-keys no-magic-numbers*/
     const unitMap = {
       'µg': (1 / 100),
       'mg': 1000 * (1 / 100),
