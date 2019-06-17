@@ -1,9 +1,11 @@
+// tslint:disable: no-console
+
 import axios from "axios";
 import fs from "fs-extra";
 import path from "path";
 
 import { IFoodNutritionFood } from "./FoodNuritionFoodInterface";
-import { UsdaFood } from "./USDAFoodInterface";
+import { IUsdaFood } from "./USDAFoodInterface";
 import { UsdaFoodNutrient } from "./USDAFoodNutrientInterface";
 
 export class USDA {
@@ -14,12 +16,12 @@ export class USDA {
     console.log("You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list");
     console.log("Example Usage: node dist/app.js 11564");
   }
-  public async getFoodByID(foodId: string, accessToken: string): Promise<UsdaFood> {
+  public async getFoodByID(foodId: string, accessToken: string): Promise<IUsdaFood> {
     const url = `https://api.nal.usda.gov/ndb/V2/reports?ndbno=${foodId}&type=f&format=json&api_key=${accessToken}`;
     return (await axios.get(url)).data.foods.shift().food;
   }
 
-  public async cachedGetFoodById(foodId: string, accessToken: string): Promise<UsdaFood> {
+  public async cachedGetFoodById(foodId: string, accessToken: string): Promise<IUsdaFood> {
     const foodCachePath = path.resolve(__dirname, `../foods/${foodId}.json`);
     let food = null;
     try {
@@ -32,16 +34,21 @@ export class USDA {
   }
 
   /* tslint:disable:object-literal-sort-keys no-magic-numbers*/
-  public formatFood(food: UsdaFood): IFoodNutritionFood {
+  public formatFood(food: IUsdaFood): IFoodNutritionFood {
     const get = this.extractNutrient(food.nutrients);
     return {
       name: food.desc.name,
+      category: food.desc.fg,
       usda_id: food.desc.ndbno,
       calories: get(208),
       proteins: get(203),
       fat: get(204),
       carbohydrates: get(205),
       fibers: get(291),
+      saturated_fats: get(606),
+      sugars: get(269),
+      water: get(255),
+      ash: get(207),
       serving: 100,
       nutrients: {
         "Calcium": get(301),

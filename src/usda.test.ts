@@ -1,7 +1,9 @@
+// tslint:disable: object-literal-sort-keys no-conosle
 import fs from "fs-extra";
 import { USDA } from "./usda";
 
 test("General fetching works", async () => {
+  jest.setTimeout(30000);
   const usda = new USDA();
   const usdaId = "11564";
   await fs.removeSync(`foods/${usdaId}.json`);
@@ -11,6 +13,11 @@ test("General fetching works", async () => {
   expect(formattedFood).toStrictEqual({
     name: "Turnips, raw",
     usda_id: "11564",
+    category: "Vegetables and Vegetable Products",
+    saturated_fats: 110,
+    sugars: 38000,
+    water: 918700,
+    ash: 7000,
     calories: 0.28,
     proteins: 9000,
     fat: 1000,
@@ -69,6 +76,11 @@ test("General caching works", async () => {
   expect(formattedFood).toStrictEqual({
     name: "Turnips, raw",
     usda_id: "11564",
+    ash: 7000,
+    category: "Vegetables and Vegetable Products",
+    saturated_fats: 110,
+    sugars: 38000,
+    water: 918700,
     calories: 0.28,
     proteins: 9000,
     fat: 1000,

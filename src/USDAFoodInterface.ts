@@ -1,9 +1,10 @@
 import { UsdaFoodNutrient } from "./USDAFoodNutrientInterface";
 
-export interface UsdaFood {
+export interface IUsdaFood {
   desc: {
     name: string
-    ndbno: string,
+    ndbno: string
+    fg: string,
   };
   nutrients: UsdaFoodNutrient[];
 }

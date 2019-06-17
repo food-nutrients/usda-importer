@@ -1,11 +1,16 @@
 export interface IFoodNutritionFood {
   name: string;
+  category: string;
   usda_id: string;
   calories: number;
   proteins: number;
   fat: number;
   carbohydrates: number;
   fibers: number;
+  saturated_fats: number;
+  sugars: number;
+  water: number;
+  ash: number;
   serving: number;
   nutrients: {
     Calcium: number
