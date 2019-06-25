@@ -16,6 +16,7 @@ export class USDA {
     console.log("You can find the usda id from: https://ndb.nal.usda.gov/ndb/search/list");
     console.log("Example Usage: node dist/app.js 11564");
   }
+
   public async getFoodByID(foodId: string, accessToken: string): Promise<IUsdaFood> {
     const url = `https://api.nal.usda.gov/ndb/V2/reports?ndbno=${foodId}&type=f&format=json&api_key=${accessToken}`;
     return (await axios.get(url)).data.foods.shift().food;
@@ -35,6 +36,9 @@ export class USDA {
 
   /* tslint:disable:object-literal-sort-keys no-magic-numbers*/
   public formatFood(food: IUsdaFood): IFoodNutritionFood {
+    if (!food) {
+      throw new Error("Could not get food");
+    }
     const get = this.extractNutrient(food.nutrients);
     return {
       name: food.desc.name,

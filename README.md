@@ -22,13 +22,33 @@ tsc
 You can find the usda_id from: <https://ndb.nal.usda.gov/ndb/search/list>
 
 ```bash
-node dist/app.js [usda_id]
+node dist/app.js -f [usda_id]
 ```
 
 ### Example Usage for (Turnips, raw)
 
 ```bash
-node dist/app.js 11564
+node dist/app.js -f 11564
+```
+
+### You can check the help menu
+
+```bash
+node dist/app.js --help
+```
+
+```
+Usage:
+  usda_import [OPTIONS] [ARGS]
+
+Options:
+  -f, --foodId NUMBER    USDA Food ID to retrive
+  -q, --query STRING     Get a list of Foods by search query
+  -k, --no-color         Omit color from output
+      --debug            Show debug information
+  -c, --catch            Catch unanticipated errors
+  -v, --version          Display the current version
+  -h, --help             Display help and usage details
 ```
 
 ## Contribution
